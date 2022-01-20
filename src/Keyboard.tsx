@@ -3,12 +3,13 @@ import { Clue, clueClass } from "./clue";
 interface KeyboardProps {
   letterInfo: Map<string, Clue>;
   onKey: (key: string) => void;
+  disabled: boolean;
 }
 
 export function Keyboard(props: KeyboardProps) {
   const keyboard = [
     "q w e r t y u i o p".split(" "),
-    "a s d f g h j k l".split(" "),
+    "a s d f g h j k l ö ä".split(" "),
     "Backspace z x c v b n m Enter".split(" "),
   ];
 
@@ -24,6 +25,9 @@ export function Keyboard(props: KeyboardProps) {
             }
             if (label.length > 1) {
               className += " Game-keyboard-button-wide";
+            }
+			if (props.disabled) {
+              className += " disabled";
             }
             return (
               <div

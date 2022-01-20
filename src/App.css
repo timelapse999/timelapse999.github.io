@@ -9,12 +9,13 @@ body {
 
 .Row {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .Row-letter {
   margin: 2px;
-  border: 2px solid rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(128, 128, 128, 0.8);
   flex: 1;
   max-width: 40px;
   height: 40px;
@@ -24,6 +25,12 @@ body {
   align-items: center;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.Row-annotation {
+  margin-inline-start: 16px;
+  width: 5em;
+  text-align: start;
 }
 
 .App-container {
@@ -39,10 +46,14 @@ body {
   margin-top: 0;
 }
 
+.Game,
+h1 {
+  user-select: none;
+}
+
 .Game {
   display: flex;
   flex-direction: column;
-  user-select: none;
 }
 
 table.Game-rows {
@@ -89,6 +100,10 @@ table.Game-rows > tbody {
   cursor: pointer;
 }
 
+.Game-keyboard-button.disabled {
+  pointer-events: none;
+}
+
 .Game-keyboard-button-wide {
   flex: 2;
 }
@@ -99,51 +114,29 @@ table.Game-rows > tbody {
 
 .letter-correct {
   border: 2px solid rgba(0, 0, 0, 0.3);
-  background-color: rgb(87, 172, 87);
-  color: white;
+  background-color: rgb(87, 172, 120);
+  color: white !important;
 }
 
 .letter-elsewhere {
-  border: 2px dotted rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   background-color: #e9c601;
-  color: white;
+  color: white !important;
 }
 
 .letter-absent {
   border: 2px solid transparent;
   background-color: rgb(162, 162, 162);
-  color: white;
+  color: white !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #404040;
-    color: #e0e0e0;
-  }
+body.dark {
+  background-color: #404040;
+  color: #e0e0e0;
+}
 
-  .Game-keyboard-button {
-    color: #404040;
-  }
-
-  .Row-letter {
-    border: 2px solid rgba(255, 255, 255, 0.4);
-  }
-
-  .letter-correct {
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    color: white;
-  }
-
-  .letter-elsewhere {
-    border: 2px dotted rgba(0, 0, 0, 0.3);
-    color: white;
-  }
-
-  .letter-absent {
-    border: 2px solid transparent;
-    background-color: rgb(142, 142, 142);
-    color: white;
-  }
+body.dark .Game-keyboard-button {
+  color: #404040;
 }
 
 a,
@@ -181,6 +174,21 @@ a:active {
   line-height: 1.4;
 }
 
+.App-about b {
+  background-color: #888;
+  color: white;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.App-about b.green-bg {
+  background-color: rgb(87, 172, 120);
+}
+
+.App-about b.yellow-bg {
+  background-color: #e9c601;
+}
+
 .Game-seed-info {
   opacity: 0.5;
   margin-top: 1em;
@@ -195,4 +203,117 @@ a:active {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.Settings {
+  text-align: left;
+  font-size: 18px;
+}
+
+.Settings-setting {
+  margin: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.Settings-setting input {
+  width: 18px;
+  height: 18px;
+}
+
+.Settings-setting label {
+  margin-inline-start: 8px;
+}
+
+.top-right {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.emoji-link {
+  font-size: 150%;
+  text-decoration: none;
+}
+
+.top-right a + a {
+  margin-inline-start: 8px;
+}
+
+/* Animations */
+
+@keyframes flip {
+  0% { transform: scaleY(1) }
+  50% { transform: scaleY(0) }
+  100% { transform: scaleY(1) }
+}
+
+@keyframes bump {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.2) }
+  100% { transform: scale(1) }
+}
+
+.already-typed {
+  animation: bump 200ms ease 1 forwards;
+}
+
+.Game-keyboard-button {
+  transition-delay: var(--keyboard-transition-delay, 0ms);
+  transition-property: border, background-color, color;
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(1) {
+  animation: flip var(--letter-flip-duration) ease 0ms 1 forwards;
+  transition-delay: var(--letter-transition-delay);
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(2) {
+  animation: flip var(--letter-flip-duration) ease var(--animation-row-offset) 1 forwards;
+  transition-delay: calc(var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(3) {
+  animation: flip var(--letter-flip-duration) ease calc(2 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(2 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(4) {
+  animation: flip var(--letter-flip-duration) ease calc(3 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(3 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(5) {
+  animation: flip var(--letter-flip-duration) ease calc(4 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(4 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(6) {
+  animation: flip var(--letter-flip-duration) ease calc(5 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(5 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(7) {
+  animation: flip var(--letter-flip-duration) ease calc(6 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(6 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(8) {
+  animation: flip var(--letter-flip-duration) ease calc(7 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(7 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(9) {
+  animation: flip var(--letter-flip-duration) ease calc(8 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(8 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(10) {
+  animation: flip var(--letter-flip-duration) ease calc(9 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(9 * var(--animation-row-offset) + var(--letter-transition-delay));
+}
+
+.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(11) {
+  animation: flip var(--letter-flip-duration) ease calc(10 * var(--animation-row-offset)) 1 forwards;
+  transition-delay: calc(10 * var(--animation-row-offset) + var(--letter-transition-delay));
 }

@@ -11,64 +11,60 @@ function About() {
   return (
     <div className="App-about">
       <p>
-        <i>hello wordl</i> is a remake of the word game{" "}
-        <a href="https://www.powerlanguage.co.uk/wordle/">
-          <i>Wordle</i>
-        </a>{" "}
-        by <a href="https://twitter.com/powerlanguish">powerlanguage</a>, which
-        I think is based on the TV show <i>Lingo</i>.
+        <i>Kieluri</i> pohjautuu <a href="https://www.powerlanguage.co.uk/wordle/"><i>Wordle</i></a>{" "} -peliin, jonka on tehnyt
+        
+         <a href="https://twitter.com/powerlanguish"> powerlanguage</a>. Wordle puolestaan muistuttaa brittiläisen ITV:n <i>Lingo</i> -pelishowta.
       </p>
       <p>
-        You get {maxGuesses} tries to guess a target word.
+        Sinulla on {maxGuesses} yritystä arvata sana.
         <br />
-        After each guess, you get Mastermind-style feedback:
+        Jokaisen arvauksen jälkeen saat Mastermind-tyylisen palautteen:
       </p>
       <Row
         rowState={RowState.LockedIn}
         wordLength={4}
         cluedLetters={[
-          { clue: Clue.Absent, letter: "w" },
-          { clue: Clue.Absent, letter: "o" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Elsewhere, letter: "d" },
+          { clue: Clue.Elsewhere, letter: "l" },
+          { clue: Clue.Correct, letter: "e" },
+          { clue: Clue.Absent, letter: "v" },
+          { clue: Clue.Absent, letter: "y" },
         ]}
       />
       <p>
-        <b>W</b> and <b>O</b> aren't in the target word at all.
+        <b>V</b> ja <b>Y</b> eivät ole kohdesanassa lainkaan.
         <br />
-        <b>R</b> is correct! The third letter is <b>R</b>
+        <b>E</b> on oikein! Toinen kirjain on <b>E</b>
         .<br />
-        <b>D</b> occurs <em>elsewhere</em> in the target word.
+        <b>L</b> esiintyy <em>muualla</em> kohdesanassa.
       </p>
       <p>
-        Let's move the <b>D</b> in our next guess:
+        Siirretään <b>L</b> seuraavassa arvauksessamme:
       </p>
       <Row
         rowState={RowState.LockedIn}
         wordLength={4}
         cluedLetters={[
-          { clue: Clue.Correct, letter: "d" },
-          { clue: Clue.Correct, letter: "a" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Absent, letter: "k" },
+          { clue: Clue.Correct, letter: "k" },
+          { clue: Clue.Correct, letter: "e" },
+          { clue: Clue.Correct, letter: "l" },
+          { clue: Clue.Absent, letter: "i" },
         ]}
       />
-      <p>So close!</p>
+      <p>Niin lähellä!</p>
       <Row
         rowState={RowState.LockedIn}
         wordLength={4}
         cluedLetters={[
-          { clue: Clue.Correct, letter: "d" },
+          { clue: Clue.Correct, letter: "k" },
+          { clue: Clue.Correct, letter: "e" },
+          { clue: Clue.Correct, letter: "l" },
           { clue: Clue.Correct, letter: "a" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Correct, letter: "t" },
         ]}
       />
-      <p>Got it!</p>
+      <p>Siinähän se!</p>
       <p>
-        Report issues{" "}
-        <a href="https://github.com/lynn/hello-wordl/issues">here</a>, or tweet{" "}
-        <a href="https://twitter.com/chordbug">@chordbug</a>.
+        Ilmoita ongelmista{" "}
+        <a href="https://github.com/">täällä</a>.
       </p>
     </div>
   );
@@ -78,10 +74,10 @@ function App() {
   const [about, setAbout] = useState(false);
   return (
     <div className="App-container">
-      <h1>hello wordl</h1>
+      <h1>Kieluri</h1>
       <div style={{ position: "absolute", right: 5, top: 5 }}>
         <a href="#" onClick={() => setAbout((a) => !a)}>
-          {about ? "Close" : "About"}
+          {about ? "Sulje" : "Tietoja"}
         </a>
       </div>
       <div style={{ position: "absolute", left: 5, top: 5 }}>
@@ -94,7 +90,7 @@ function App() {
                 new Date().toISOString().replace(/-/g, "").slice(0, 8))
           }
         >
-          {seed ? "Random" : "Today's"}
+          {seed ? "Satunnainen sana" : "Päivän sana"}
         </a>
       </div>
       {about && <About />}

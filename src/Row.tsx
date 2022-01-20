@@ -23,6 +23,9 @@ export function Row(props: RowProps) {
       if (isLockedIn && clue !== undefined) {
         letterClass += " " + clueClass(clue);
       }
+	  if (letter) {
+        letterClass += " already-typed"
+      }
       return (
         <td
           key={i}

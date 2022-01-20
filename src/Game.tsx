@@ -17,28 +17,41 @@ interface GameProps {
   hidden: boolean;
 }
 
-const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
+const targets = targetList.slice(0, targetList.indexOf("jaahas") + 1); // Words no rarer than this one
 
 function randomTarget(wordLength: number) {
   const eligible = targets.filter((word) => word.length === wordLength);
   return pick(eligible);
 }
 
+function calculateDuration(wordLength: number): number {
+  const computedStyle = getComputedStyle(document.documentElement)
+  const flipDuration = computedStyle.getPropertyValue('--letter-flip-duration');
+  const rowOffset = computedStyle.getPropertyValue('--animation-row-offset');
+
+  return (wordLength - 1) * parseInt(rowOffset) + parseInt(flipDuration);
+}
+
 function Game(props: GameProps) {
   const [gameState, setGameState] = useState(GameState.Playing);
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [wordLength, setWordLength] = useState(5);
-  const [hint, setHint] = useState<string>(`Make your first guess!`);
+  const [wordLength, setWordLength] = useState(3);
+  const [hint, setHint] = useState<string>(`Anna ensimmäinen arvauksesi!`);
   const [srStatus, setSrStatus] = useState<string>(``);
   const [target, setTarget] = useState(() => {
     resetRng();
     return randomTarget(wordLength);
   });
+  const [timeBetweenGuesses, setTimeBetweenGuesses] = useState(() => {
+    return calculateDuration(wordLength);
+  });
   const [gameNumber, setGameNumber] = useState(1);
+  const [keyboardDisabled, setKeyboardDisabled] = useState(false);
 
   const startNextGame = () => {
     setTarget(randomTarget(wordLength));
+	setTimeBetweenGuesses(calculateDuration(wordLength));
     setGuesses([]);
     setCurrentGuess("");
     setHint("");
@@ -54,7 +67,7 @@ function Game(props: GameProps) {
       return;
     }
     if (guesses.length === props.maxGuesses) return;
-    if (/^[a-z]$/i.test(key)) {
+    if (/^[a-zäö]$/i.test(key)) {
       setCurrentGuess((guess) =>
         (guess + key.toLowerCase()).slice(0, wordLength)
       );
@@ -65,23 +78,25 @@ function Game(props: GameProps) {
       setHint("");
     } else if (key === "Enter") {
       if (currentGuess.length !== wordLength) {
-        setHint("Too short");
+        setHint("Sana on liian lyhyt");
         return;
       }
       if (!dictionary.includes(currentGuess)) {
-        setHint("Not a valid word");
+        setHint("En tunne sanaa");
         return;
       }
+	  setKeyboardDisabled(true);
+      setTimeout(() => setKeyboardDisabled(false), timeBetweenGuesses);
       setGuesses((guesses) => guesses.concat([currentGuess]));
       setCurrentGuess((guess) => "");
       if (currentGuess === target) {
         setHint(
-          `You won! The answer was ${target.toUpperCase()}. (Enter to play again)`
+          `Voitit! Sana oli ${target.toUpperCase()}. (Paina ENTER pelataksesi uudestaan)`
         );
         setGameState(GameState.Won);
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(
-          `You lost! The answer was ${target.toUpperCase()}. (Enter to play again)`
+          `Ei voittoa! Oikea vastaus oli ${target.toUpperCase()}. (Paina ENTER pelataksesi uudestaan)`
         );
         setGameState(GameState.Lost);
       } else {
@@ -100,11 +115,17 @@ function Game(props: GameProps) {
         e.preventDefault();
       }
     };
-    document.addEventListener("keydown", onKeyDown);
+    if (!keyboardDisabled) {
+      document.addEventListener("keydown", onKeyDown);
+    }
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [currentGuess, gameState]);
+  }, [currentGuess, gameState, keyboardDisabled]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--keyboard-transition-delay', timeBetweenGuesses + "ms");
+  }, [timeBetweenGuesses])
 
   let letterInfo = new Map<string, Clue>();
   const tableRows = Array(props.maxGuesses)
@@ -141,11 +162,11 @@ function Game(props: GameProps) {
   return (
     <div className="Game" style={{ display: props.hidden ? "none" : "block" }}>
       <div className="Game-options">
-        <label htmlFor="wordLength">Letters:</label>
+        <label htmlFor="wordLength">Kirjaimia:</label>
         <input
           type="range"
-          min="4"
-          max="11"
+          min="3"
+          max="4"
           id="wordLength"
           disabled={
             gameState === GameState.Playing &&
@@ -175,7 +196,7 @@ function Game(props: GameProps) {
             (document.activeElement as HTMLElement)?.blur();
           }}
         >
-          Give up
+          Luovuta
         </button>
       </div>
       <table className="Game-rows" tabIndex={0} aria-label="Table of guesses">
@@ -185,7 +206,7 @@ function Game(props: GameProps) {
       {/* <p role="alert" className="Game-sr-feedback">
         {srStatus}
       </p> */}
-      <Keyboard letterInfo={letterInfo} onKey={onKey} />
+      <Keyboard letterInfo={letterInfo} onKey={onKey} disabled={keyboardDisabled} />
       {seed ? (
         <div className="Game-seed-info">
           seed {seed}, length {wordLength}, game {gameNumber}
