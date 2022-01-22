@@ -182,7 +182,7 @@ function Game(props: GameProps) {
             setCurrentGuess("");
             setTarget(randomTarget(length));
             setWordLength(length);
-            setHint(`${length} letters`);
+            setHint(`${length} kirjainta`);
           }}
         ></input>
         <button
@@ -190,7 +190,7 @@ function Game(props: GameProps) {
           disabled={gameState !== GameState.Playing || guesses.length === 0}
           onClick={() => {
             setHint(
-              `The answer was ${target.toUpperCase()}. (Enter to play again)`
+              `Vastaus oli ${target.toUpperCase()}. (Paina ENTER pelataksesi uudestaan)`
             );
             setGameState(GameState.Lost);
             (document.activeElement as HTMLElement)?.blur();
