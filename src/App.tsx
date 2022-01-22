@@ -64,7 +64,7 @@ function About() {
       <p>Siinähän se!</p>
       <p>
         Ilmoita ongelmista{" "}
-        <a href="https://github.com/">täällä</a>.
+        <a href="https://github.com/timelapse999/hello-wordl">täällä</a>.
       </p>
     </div>
   );
@@ -90,7 +90,7 @@ function App() {
                 new Date().toISOString().replace(/-/g, "").slice(0, 8))
           }
         >
-          {seed ? "Satunnainen sana" : "Päivän sana"}
+          {seed ? "Arvo sana" : "Päivän sana"}
         </a>
       </div>
       {about && <About />}
