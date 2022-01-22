@@ -17,7 +17,7 @@ interface GameProps {
   hidden: boolean;
 }
 
-const targets = targetList.slice(0, targetList.indexOf("jaahas") + 1); // Words no rarer than this one
+const targets = targetList.slice(0, targetList.indexOf("öljy") + 1); // Words no rarer than this one
 
 function randomTarget(wordLength: number) {
   const eligible = targets.filter((word) => word.length === wordLength);
