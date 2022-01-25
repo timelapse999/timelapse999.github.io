@@ -4,6 +4,8 @@ import Game from "./Game";
 import { useState } from "react";
 import { Row, RowState } from "./Row";
 import { Clue } from "./clue";
+// @ts-ignore
+import { ReactComponent as Info } from './icons/question-circle.svg';
 
 const maxGuesses = 6;
 
@@ -72,12 +74,14 @@ function About() {
 
 function App() {
   const [about, setAbout] = useState(false);
+  const element = <Info style={{ height: 25, width: 25 }} />
+
   return (
     <div className="App-container">
       <h1>Kieluri</h1>
       <div style={{ position: "absolute", right: 5, top: 5 }}>
         <a href="#" onClick={() => setAbout((a) => !a)}>
-          {about ? "Sulje" : "Tietoja"}
+          {about ? "Sulje" : element}
         </a>
       </div>
       <div style={{ position: "absolute", left: 5, top: 5 }}>
