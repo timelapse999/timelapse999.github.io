@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
-import dictionary from "./dictionary.json";
+import dictionary from "./dictionaryCombined.json";
 import { Clue, clue, describeClue } from "./clue";
 import { Keyboard } from "./Keyboard";
-import targetList from "./targets.json";
-import { dictionarySet, pick, resetRng, seed, speak } from "./util";
+import targetList from "./targetWords.json";
+import { 
+	dictionarySet, 
+	pick, 
+	resetRng, 
+	seed, 
+	speak,
+	urlParam,
+} from "./util";
 
 enum GameState {
   Playing,
@@ -15,9 +22,12 @@ enum GameState {
 interface GameProps {
   maxGuesses: number;
   hidden: boolean;
+  colorBlind: boolean;
 }
 
-const targets = targetList.slice(0, targetList.indexOf("väsyä") + 1); // Words no rarer than this one
+const targets = targetList.slice(0, targetList.indexOf("örkki") + 1); // Words no rarer than this one
+const minWordLength = 3;
+const maxWordLength = 5;
 
 function randomTarget(wordLength: number) {
   const eligible = targets.filter((word) => word.length === wordLength);
@@ -165,8 +175,8 @@ function Game(props: GameProps) {
         <label htmlFor="wordLength">Kirjaimia:</label>
         <input
           type="range"
-          min="3"
-          max="5"
+          min={minWordLength}
+          max={maxWordLength}
           id="wordLength"
           disabled={
             gameState === GameState.Playing &&

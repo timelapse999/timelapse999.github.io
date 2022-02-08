@@ -13,6 +13,7 @@ export function Keyboard(props: KeyboardProps) {
     "Backspace z x c v b n m Enter".split(" "),
   ];
 
+
   return (
     <div className="Game-keyboard" aria-hidden="true">
       {keyboard.map((row, i) => (

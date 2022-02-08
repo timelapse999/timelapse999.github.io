@@ -26,6 +26,19 @@ body {
   text-transform: uppercase;
   font-weight: bold;
 }
+.Row-letter-color {
+  margin: 2px;
+  border: 2px solid rgba(128, 128, 128, 0.8);
+  flex: 1;
+  max-width: 40px;
+  height: 40px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 
 .Row-annotation {
   margin-inline-start: 16px;
@@ -100,10 +113,6 @@ table.Game-rows > tbody {
   cursor: pointer;
 }
 
-.Game-keyboard-button.disabled {
-  pointer-events: none;
-}
-
 .Game-keyboard-button-wide {
   flex: 2;
 }
@@ -119,7 +128,7 @@ table.Game-rows > tbody {
 }
 
 .letter-elsewhere {
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2px dotted rgba(0, 0, 0, 0.3);
   background-color: #e9c601;
   color: white !important;
 }
@@ -133,6 +142,7 @@ table.Game-rows > tbody {
 body.dark {
   background-color: #404040;
   color: #e0e0e0;
+  color-scheme: dark;
 }
 
 body.dark .Game-keyboard-button {
@@ -141,7 +151,7 @@ body.dark .Game-keyboard-button {
 
 a,
 a:visited {
-  color: #8080ff;
+  color: #8aa4bd;
 }
 
 a:active {
@@ -190,7 +200,7 @@ a:active {
 }
 
 .Game-seed-info {
-  opacity: 0.5;
+  opacity: 0.7;
   margin-top: 1em;
   font-variant-numeric: tabular-nums;
 }
@@ -213,7 +223,7 @@ a:active {
 .Settings-setting {
   margin: 8px;
   display: flex;
-  align-items: center;
+  align-items: top;
 }
 
 .Settings-setting input {
@@ -221,8 +231,14 @@ a:active {
   height: 18px;
 }
 
+.Settings-setting input[type="range"] {
+  width: 50px;
+  height: 18px;
+}
+
 .Settings-setting label {
   margin-inline-start: 8px;
+  margin-inline-end: 8px;
 }
 
 .top-right {
@@ -231,89 +247,30 @@ a:active {
   right: 5px;
 }
 
-.emoji-link {
-  font-size: 150%;
+.icon-link {
+  font-size: 24px;
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  fill: #887;
 }
 
-.top-right a + a {
+.top-right > * + * {
   margin-inline-start: 8px;
 }
 
-/* Animations */
-
-@keyframes flip {
-  0% { transform: scaleY(1) }
-  50% { transform: scaleY(0) }
-  100% { transform: scaleY(1) }
+.App-container.color-blind .letter-correct,
+.App-container.color-blind .App-about b.green-bg {
+  background-color: #f5793a;
 }
 
-@keyframes bump {
-  0% { transform: scale(1) }
-  50% { transform: scale(1.2) }
-  100% { transform: scale(1) }
+.App-container.color-blind .letter-elsewhere,
+.App-container.color-blind .App-about b.yellow-bg {
+  background-color: #85c0f9;
 }
 
-.already-typed {
-  animation: bump 200ms ease 1 forwards;
-}
-
-.Game-keyboard-button {
-  transition-delay: var(--keyboard-transition-delay, 0ms);
-  transition-property: border, background-color, color;
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(1) {
-  animation: flip var(--letter-flip-duration) ease 0ms 1 forwards;
-  transition-delay: var(--letter-transition-delay);
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(2) {
-  animation: flip var(--letter-flip-duration) ease var(--animation-row-offset) 1 forwards;
-  transition-delay: calc(var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(3) {
-  animation: flip var(--letter-flip-duration) ease calc(2 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(2 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(4) {
-  animation: flip var(--letter-flip-duration) ease calc(3 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(3 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(5) {
-  animation: flip var(--letter-flip-duration) ease calc(4 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(4 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(6) {
-  animation: flip var(--letter-flip-duration) ease calc(5 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(5 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(7) {
-  animation: flip var(--letter-flip-duration) ease calc(6 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(6 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(8) {
-  animation: flip var(--letter-flip-duration) ease calc(7 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(7 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(9) {
-  animation: flip var(--letter-flip-duration) ease calc(8 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(8 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(10) {
-  animation: flip var(--letter-flip-duration) ease calc(9 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(9 * var(--animation-row-offset) + var(--letter-transition-delay));
-}
-
-.Row-letter:is(.letter-correct, .letter-elsewhere, .letter-absent):nth-child(11) {
-  animation: flip var(--letter-flip-duration) ease calc(10 * var(--animation-row-offset)) 1 forwards;
-  transition-delay: calc(10 * var(--animation-row-offset) + var(--letter-transition-delay));
+.leftAlign {
+	text-align: left;
 }
