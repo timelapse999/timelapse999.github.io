@@ -43,17 +43,7 @@ function About() {
         
           &nbsp;<a href="https://twitter.com/powerlanguish" target="_blank">Josh Wardle</a>.<br />Wordle puolestaan muistuttaa brittil&auml;isen ITV:n <a href="http://www.ukgameshows.com/ukgs/Lingo" target="_blank"><i>Lingo</i></a> -pelishowta.
       </p>
-	  <p>
-	  Sinulla on kolme vaihtoehtoa pelata. Sana tulee joukosta, jossa ovat:
-	  </p>
-
-	  <ol className="leftAlign">
-	  <li>Kaikki kolmen kirjaimen perus- ja taivutusmuodot, esim. puu, i&auml;n, kun, lue (190 sanaa).</li>
-
-      <li>Kaikki nelj&auml;n kirjaimen perus- ja taivutusmuodot, esim. talo, suun, siis, uida, nyki, olin, n&auml;&ouml;n, meni (1700 sanaa).</li>
-
-      <li>Kaikki viiden kirjaimen perusmuodot, esim. torvi, kaksi, ilke&auml;, tulla, hakea, saada, miten (2800 sanaa).</li>
-	  </ol>
+	  
  
       <p>
         Sinulla on {maxGuesses} yrityst&auml; arvata sana.
@@ -102,6 +92,18 @@ function About() {
         ]}
       />
       <p>Siin&auml;h&auml;n se!</p>
+	  
+	  <p>
+	  Sinulla on kolme vaihtoehtoa pelata. Sana tulee joukosta, jossa ovat:
+	  </p>
+	  
+	  <ol className="leftAlign">
+	  <li>Kaikki kolmen kirjaimen perus- ja taivutusmuodot, esim. puu, i&auml;n, kun, lue (186 sanaa).</li>
+
+      <li>Kaikki nelj&auml;n kirjaimen perus- ja taivutusmuodot, esim. talo, suun, siis, uida, nyki, olin, n&auml;&ouml;n, meni (1659 sanaa).</li>
+
+      <li>Kaikki viiden kirjaimen perusmuodot, esim. torvi, kaksi, ilke&auml;, tulla, hakea, saada, miten (8153 sanaa).</li>
+	  </ol>
       
 	  <p>
 		<strong>Kielurin ovat tehneet:</strong><br />
