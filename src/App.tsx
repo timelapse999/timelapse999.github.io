@@ -61,11 +61,11 @@ function About() {
         ]}
       />
       <p>
-        <b>V</b> ja <b>Y</b> eiv&auml;t ole kohdesanassa lainkaan.
+        <b>V</b> ja <b>Y</b> eiv&auml;t harmaataustaisina ole kohdesanassa lainkaan.
         <br />
-        <b>E</b> on oikein! Toinen kirjain on <b>E</b>
+        <b className="green-bg">E</b> vihre&auml;taustaisena on oikein! Toinen kirjain on <b className="green-bg">E</b>
         .<br />
-        <b>L</b> esiintyy <em>muualla</em> kohdesanassa.
+        <b className="yellow-bg">L</b> keltataustaisena esiintyy <em>muualla</em> kohdesanassa.
       </p>
       <p>
         Siirret&auml;&auml;n <b>L</b> seuraavassa arvauksessamme:
@@ -176,19 +176,22 @@ function App() {
           </>
         )}
       </div>
-      <div style={{ position: "absolute", left: 5, top: 5, visibility: page === "game" ? "visible" : "hidden" }}>
-        <a
-          href="#"
-          onClick={() =>
-            (document.location = seed
-              ? "?"
-              : "?seed=" +
-                new Date().toISOString().replace(/-/g, "").slice(0, 8))
-          }
-        >
-          {seed ? "Arvo sana" : "Päivän sana"}
-        </a>
-      </div>
+	  {/**
+     * <div style={{ position: "absolute", left: 5, top: 5, visibility: page === "game" ? "visible" : "hidden" }}>
+     *   <a
+     *     href="#"
+     *     onClick={() =>
+     *       (document.location = seed
+     *         ? "?"
+     *         : "?seed=" +
+     *           new Date().toISOString().replace(/-/g, "").slice(0, 8))
+     *     }
+     *   >
+     *     {seed ? "Arvo sana" : "Päivän sana"}
+     *   </a>
+     * </div>
+	  */}
+	  
       {page === "about" && <About />}
 	        {page === "settings" && (
         <div className="Settings">
