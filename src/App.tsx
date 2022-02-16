@@ -41,7 +41,7 @@ function About() {
       <p>
         <i>Kieluri</i> pohjautuu <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank"><i>Wordle</i></a>{" "} -peliin, jonka on tehnyt
         
-          &nbsp;<a href="https://twitter.com/powerlanguish" target="_blank">Josh Wardle</a>.<br />Wordle puolestaan muistuttaa brittil&auml;isen ITV:n <a href="http://www.ukgameshows.com/ukgs/Lingo" target="_blank"><i>Lingo</i></a> -pelishowta.
+          &nbsp;<a href="https://twitter.com/powerlanguish" target="_blank">Josh Wardle</a>.<br />Wordle puolestaan muistuttaa brittil&auml;isen ITV:n <a href="http://www.ukgameshows.com/ukgs/Lingo" target="_blank"><i>Lingo</i></a> -pelishow'ta.
       </p>
 	  
  
@@ -102,7 +102,7 @@ function About() {
 
       <li>Kaikki nelj&auml;n kirjaimen perus- ja taivutusmuodot, esim. talo, suun, siis, uida, nyki, olin, n&auml;&ouml;n, meni (1659 sanaa).</li>
 
-      <li>Kaikki viiden kirjaimen perusmuodot, esim. torvi, kaksi, ilke&auml;, tulla, hakea, saada, miten (8153 sanaa).</li>
+      <li>Kaikki viiden kirjaimen perus- ja taivutusmuodot, esim. torvi, ty&ouml;ni, yhden, ilke&auml;, tulla, sanoi, saane, t&auml;ti&auml;, t&auml;it&auml;, miten (8168 sanaa).</li>
 	  </ol>
       
 	  <p>
