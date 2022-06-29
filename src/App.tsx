@@ -102,7 +102,7 @@ function About() {
 
       <li>Kaikki nelj&auml;n kirjaimen perus- ja taivutusmuodot, esim. talo, suun, siis, uida, nyki, olin, n&auml;&ouml;n, meni (1659 sanaa).</li>
 
-      <li>Kaikki viiden kirjaimen perus- ja taivutusmuodot, esim. torvi, ty&ouml;ni, yhden, ilke&auml;, tulla, sanoi, saane, t&auml;ti&auml;, t&auml;it&auml;, miten (8168 sanaa).</li>
+      <li>Kaikki viiden kirjaimen perus- ja taivutusmuodot, esim. torvi, ty&ouml;ni, yhden, ilke&auml;, tulla, sanoi, saane, t&auml;ti&auml;, t&auml;it&auml;, miten (8169 sanaa).</li>
 	  </ol>
       
 	  <p>
